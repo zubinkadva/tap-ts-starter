@@ -1,4 +1,4 @@
-/** Parse XML files using [xml2js.parseString](https://github.com/Leonidas-from-XIV/node-xml2js)
+/** Parse XML files using [xml-js.xml2json](https://github.com/nashwaan/xml-js)
  *
  */ /** hack for https://github.com/TypeStrong/typedoc/issues/603 */
 
