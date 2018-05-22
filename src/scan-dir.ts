@@ -1,6 +1,6 @@
 /**
  * A "scanner" scans a resource collection, parsing the items it finds using the parser passed in  (see the [spec](https://github.com/singer-io/getting-started/blob/master/SPEC.md))
- * 
+ *
  * In this case, we are scanning a directory and parsing the files inside.
  */ /** hack for https://github.com/TypeStrong/typedoc/issues/603 */
 
@@ -15,8 +15,8 @@ var generateSchema = require('generate-schema') // typescript types aren't avail
  * Scan a folder, running parser on each file it finds
  * - TODO: implement configObjs.state and configObjs.catalog, which are just stubs for now
  * - TODO: use interfaces instead of "any" here
- * @param configObjs 
- * @param parser 
+ * @param configObjs
+ * @param parser
  */
 export function scanDir(configObjs: any, parser: any) {
   let config = configObjs.config
@@ -31,12 +31,10 @@ export function scanDir(configObjs: any, parser: any) {
       return Promise.all(
         // return an array of promises, one per filename, for Promise.all to run asynchronously
         filelist.map(function(filename, idx) {
-          return fse
-            .readFile(config.target_folder + '/' + filelist[idx])
-            .then(function(buffer) {
-              // the parsing is done here
-              return parser(buffer)
-            })
+          return fse.readFile(config.target_folder + '/' + filelist[idx]).then(function(buffer) {
+            // the parsing is done here
+            return parser(buffer)
+          })
         })
       )
     })
@@ -50,11 +48,11 @@ export function scanDir(configObjs: any, parser: any) {
       schm.stream = parsedObjs[0].stream
 
       // write the schema
-      console.log(JSON.stringify(schm))
+      console.log(schm)
 
       // write the objects
       parsedObjs.forEach(function(parsedObj, idx) {
-        console.log(JSON.stringify(parsedObj))
+        console.log(parsedObj)
       })
 
       // TODO: write STATE record
